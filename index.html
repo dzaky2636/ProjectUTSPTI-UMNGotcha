@@ -14,12 +14,12 @@
 
     <!-- Navbar -->
     <div class="row">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 9em">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 7em">
         <div class="container-fluid">
           <div class="navbar-nav mx-auto mx-sm-auto ms-md-auto">
             <div class="row align-items-center">
                 <div class="col-12">
-                    <img id="topimage" src="assets/topimage.png"  alt="..." style="width: 6em;">
+                    <img id="topimage" src="assets/topimage.png"  alt="..." style="width: 4em;">
                 </div>
               <div class="row text-center">
                 <div class="col-12">
@@ -32,9 +32,8 @@
       </nav>
     </div>
 
-
-    <div class="row">
-      <div class="d-flex flex-column align-items-center justify-content-center ambilbg bg-success" style="height: 50em">
+    <!-- <div class="row">
+      <div class="d-flex flex-column align-items-center justify-content-center ambilbg bg-success" style="height: 53em">
         <div class="d-flex flex-row align-items-center justify-content-center">
           <div>
             <button class="rounded" style="font-size:5em"><i class="fa fa-chevron-left"></i></button>
@@ -51,16 +50,26 @@
           <button>MULAI</button>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="row">
-      <div class="d-flex flex-column align-items-center ambilbg bg-success" style="height: 50em">
+      <div id="backgroundImage" class="d-flex flex-column align-items-center ambilbg bg-success" style="height: 53em">
         <div class="d-flex flex-column">
           <div class="card mt-3" style="width: 30em;">
-            <div class="card-body">
+            <div class="card-header">
               <div class="row">
-                <div class="col-12"><span class="h5 card-title">Stats</span></div>
+                <div class="col-4">
+                  <div class="text-start fs-5">Nama Avatar</div>
+                </div>
+                <div class="col-4">
+                  <div class="text-center fs-5">Bayi</div>
+                </div>
+                <div class="col-4">
+                  <div id="hourDisplay" class="text-end fs-5">Jam: 00:00</div>
+                </div>
               </div>
+            </div>
+            <div class="card-body">
               <div class="row pt-3">
                 <div class="col-1"><img src="assets/icons/restaurant.png" style="height: 1.5em;"></div>
                 <div class="col-5">
@@ -84,19 +93,23 @@
                 </div>
                 <div class="col-1"><img src="assets/icons/drugs.png" style="height: 1.3em;"></div>
                 <div class="col-5">
-                  <div id="progressBarTidur" class="progress">
+                  <div id="progressBarObat" class="progress">
                     <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
                   </div>
                 </div>
-              </div>
-              <div class="row pt-2">
-                <div class="text-center fs-5">Level 1</div>
               </div>
             </div>
           </div>
         </div>
         <div class="d-flex flex-column">
-          <div><img class="p-5" src="assets/owl.png" alt="owl" style="height: 20em;"></div>
+          <div class="card mt-3" style="width: 23em;">
+            <div class="card-body">
+              <div id="displayNotifications" class="text-center">Selamat Pagi [NAMA]!</div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-column">
+          <div><img class="p-5" src="assets/owl.png" alt="owl" style="height: 25em;"></div>
         </div>
         <div class="d-flex flex-column">
           <div class="card mt-3" style="width: 23em;">
@@ -114,14 +127,13 @@
                   <button id="buttonMakan" type="button" class="btn btn-info" style="width: 10em;">Main</button>
                 </div>
                 <div class="col-6 p-2">
-                  <button id="buttonTidur" type="button" class="btn btn-info" style="width: 10em;">Obat</button>
+                  <button id="buttonObat" type="button" class="btn btn-info" style="width: 10em;">Obat</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
     
