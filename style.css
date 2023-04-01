@@ -2,6 +2,11 @@
   #topimage {
     margin-left: 110px;
   }
+  .navbar {
+    height: 9rem;
+  }
+  .topimage {
+  }
 }
 
 @media only screen and (max-width: 406px) {
@@ -11,19 +16,21 @@
 }
 
 .ambilbg {
-    background-image: url("assets/bgforestday.jpg");
-    background-size: cover;
-    /* filter: blur(2px); */
-    /* height: 100%;
+  background-image: url("assets/bgforestday.jpg");
+  background-size: cover;
+  /* filter: blur(2px); */
+  /* height: 100%;
     width: 100%; */
-  }
-
+}
 
 #gotchaatas {
 }
 
 .navbar {
   height: 5%;
+  background: linear-gradient(to left, #33e041, #006400);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
 }
 
 .chevron-btn {
@@ -65,4 +72,40 @@
 
 .horizontal li a:hover {
   background-color: #f2f2f2;
+}
+
+.data-search {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #232931;
+  font-family: "roboto", cursive;
+}
+
+.input-group {
+  display: flex;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.btnmulai {
+  backface-visibility: hidden;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  white-space: nowrap;
+  background: linear-gradient(110deg, #eee 0%, #e3e3e3 10%, #fff 20.1%, #fff 25%, #f0f0f0 28.000000000000004%, #fff 28.000000000000004%, #eee 100%);
+  border-radius: 100px;
+  border: 1px solid #549e33;
+  border-width: 1px 1px 1px 1px;
+  padding: 5px 20px 7px 20px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5), 0px 0px 5px rgba(0, 0, 0, 0.25), 0px 0px 2px 4px rgba(0, 0, 0, 0.1);
+  color: rgba(9.961777236762023%, 10.580645161290326%, 10.144642726719418%, 0.81);
+  font-size: 16px;
+  font-family: Verdana;
+  font-weight: 900;
+  font-style: normal;
+  text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.3);
 }
