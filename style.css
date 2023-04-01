@@ -3,11 +3,13 @@
     margin-left: 110px;
   }
 }
+
 @media only screen and (max-width: 406px) {
   #topimage {
     margin-left: 110px;
   }
 }
+
 .ambilbg {
     background-image: url("assets/bgforestday.jpg");
     background-size: cover;
