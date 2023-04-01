@@ -1,0 +1,70 @@
+@media only screen and (max-width: 3840px) {
+  #topimage {
+    margin-left: 110px;
+  }
+}
+@media only screen and (max-width: 406px) {
+  #topimage {
+    margin-left: 110px;
+  }
+}
+/* .ambilbg {
+    background-image: url("assets/forest.jpg");
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+  } */
+.maincontainer {
+}
+#topimage {
+  height: 10vh;
+  width: 10vh;
+}
+
+#gotchaatas {
+}
+
+.navbar {
+  height: 5%;
+}
+
+.chevron-btn {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.chevron-btn:hover {
+  background-color: #0062cc;
+}
+
+.chevron-btn i {
+  margin-left: 8px;
+}
+.horizontal {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.horizontal li {
+  float: left;
+}
+
+.horizontal li a {
+  display: block;
+  color: #333;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.horizontal li a:hover {
+  background-color: #f2f2f2;
+}
