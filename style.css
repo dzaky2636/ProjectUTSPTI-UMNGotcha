@@ -8,14 +8,14 @@
     margin-left: 110px;
   }
 }
-/* .ambilbg {
-    background-image: url("assets/forest.jpg");
+.ambilbg {
+    background-image: url("assets/bgforestday.jpg");
     background-size: cover;
-    height: 100%;
-    width: 100%;
-  } */
-.maincontainer {
-}
+    /* filter: blur(2px); */
+    /* height: 100%;
+    width: 100%; */
+  }
+
 #topimage {
   height: 10vh;
   width: 10vh;
