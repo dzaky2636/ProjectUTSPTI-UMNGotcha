@@ -2,11 +2,6 @@
   #topimage {
     margin-left: 110px;
   }
-  .navbar {
-    height: 9rem;
-  }
-  .topimage {
-  }
 }
 
 @media only screen and (max-width: 406px) {
@@ -23,11 +18,7 @@
     width: 100%; */
 }
 
-#gotchaatas {
-}
-
 .navbar {
-  height: 5%;
   background: linear-gradient(to left, #33e041, #006400);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #fff;

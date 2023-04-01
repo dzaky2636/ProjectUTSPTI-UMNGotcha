@@ -8,11 +8,17 @@ const hewan = {
     xp: 0
 }
 
+activityActive = false;
+makanState = false;
+tidurState = false;
+mainState = false;
+obatState = false;
+
 // Simulasi jam
-let hour = 23; 
+let hour = 12; 
 let minutes = 0;
 setInterval(function(){
-    minutes += 60;
+    minutes += 10;
     if(minutes >= 60){ minutes = 0; hour++; }
     if(hour >= 24){ hour = 0; }
     if(minutes < 10){ printMinutes = minutes.toString().padStart(2, '0');}
@@ -20,23 +26,46 @@ setInterval(function(){
     if(hour < 10){ printHour = hour.toString().padStart(2, '0'); }
     else{ printHour = hour.toString(); } 
 
-    if(hour > 18 || hour < 6){
-        $("#backgroundImage").attr("style", "background-image: url('assets/bgforestnight.jpg'); height: 53em")
+    if(hour > 19 || hour < 6){
+        $("#backgroundImage").attr("style", "background-image: url('assets/bgforestnight.jpg'); height: 53em");
+    }else if(hour > 15){
+        $("#backgroundImage").attr("style", "background-image: url('assets/bgforestevening.jpg'); height: 53em");
     }else{
-        $("#backgroundImage").attr("style", "background-image: url('assets/bgforestday.jpg'); height: 53em")
+        $("#backgroundImage").attr("style", "background-image: url('assets/bgforestday.jpg'); height: 53em");
     }
     document.getElementById("hourDisplay").innerHTML = "Jam: " + printHour + ":" + printMinutes;
 }, 1000);
 
 // simulasi aktivitas
 setInterval(function(){
-    // makan
     makanActivity();
     tidurActivity();
-    obatActivity()
+    obatActivity();
+    mainActivity();
     progressBarColor();
 }, 1000);
 
+// Pilih Avatar
+avatarSelectIndex = 0;
+$("#buttonSelectLeft").click(function(){
+    avatarSelectIndex--;
+    if(avatarSelectIndex <= -1) avatarSelectIndex = 2;
+    selectCharacter(avatarSelectIndex);
+});
+$("#buttonSelectRight").click(function(){
+    avatarSelectIndex++; 
+    if(avatarSelectIndex >= 3) avatarSelectIndex = 0;
+    selectCharacter(avatarSelectIndex);
+});
+function selectCharacter(index){
+    switch(index){
+        case 0: $("#displaySelectedAvatar").attr("src", "assets/avatars/Styracosaurus/idle.gif"); break;
+        case 1: $("#displaySelectedAvatar").attr("src", "assets/avatars/Carnotaurus/idle.gif"); break;
+        case 2: $("#displaySelectedAvatar").attr("src", "assets/avatars/Baryonyx/idle.gif"); break;
+    }
+}
+
+// Display
 function progressBarColor(){
     barMakan = $("#progressBarMakan").children();
     if(hewan.makan <= 25){
@@ -86,22 +115,14 @@ function progressBarColor(){
         else barObat.attr("class", "progress-bar bg-success");
     }
 }
-
 function redrawButtons(){
     if(!makanState) $("#buttonMakan").attr("class", "btn btn-info"); else $("#buttonMakan").attr("class", "btn btn-success");
     if(!tidurState) $("#buttonTidur").attr("class", "btn btn-info"); else $("#buttonTidur").attr("class", "btn btn-success");
-    if(!mainState) $("#mainState").attr("class", "btn btn-info"); else $("#mainState").attr("class", "btn btn-success");
+    if(!mainState) $("#buttonMain").attr("class", "btn btn-info"); else $("#buttonMain").attr("class", "btn btn-success");
     if(!obatState) $("#buttonObat").attr("class", "btn btn-info"); else $("#buttonObat").attr("class", "btn btn-success");
 }
 
-// Inisialisasi
-activityActive = false;
-makanState = false;
-tidurState = false;
-mainState = false;
-obatState = false;
-
-// Makan
+// Tombol Aktivitas & Aktivitas
 $("#buttonMakan").click(function(){
     if(makanState){
         makanState = false;
@@ -111,8 +132,6 @@ $("#buttonMakan").click(function(){
     }
     redrawButtons();
 });
-
-// Tidur
 $("#buttonTidur").click(function(){
     if(tidurState){ 
         tidurState = false;
@@ -122,10 +141,15 @@ $("#buttonTidur").click(function(){
     }
     redrawButtons();
 });
-
-// Main
-
-// Obat
+$("#buttonMain").click(function(){
+    if(mainState){ 
+        mainState = false;
+    }else{
+        makanState = tidurState = obatState = false;
+        mainState = true;
+    }
+    redrawButtons();
+});
 $("#buttonObat").click(function(){
     if(obatState){
         obatState = false;
@@ -135,7 +159,6 @@ $("#buttonObat").click(function(){
     }
     redrawButtons();
 });
-
 function makanActivity(){
     if(makanState && hewan.makan <= 100){
         hewan.makan += 4;
@@ -144,7 +167,6 @@ function makanActivity(){
     }
     $("#progressBarMakan").children().attr("style", "width: " + ((100 * hewan.makan) / 100) + "%");
 }
-
 function tidurActivity(){
     if(tidurState && hewan.tidur <= 100){
         hewan.tidur += 5;
@@ -153,7 +175,14 @@ function tidurActivity(){
     }
     $("#progressBarTidur").children().attr("style", "width: " + ((100 * hewan.tidur) / 100) + "%");
 }
-
+function mainActivity(){
+    if(mainState && hewan.main <= 100){
+        hewan.main += 5;
+    }else if(!mainState && hewan.main > 0){
+        hewan.main -= 2.5;  
+    }
+    $("#progressBarMain").children().attr("style", "width: " + ((100 * hewan.main) / 100) + "%");
+}
 function obatActivity(){
     if(obatState && hewan.obat <= 100){
         hewan.obat += 5;

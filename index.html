@@ -37,17 +37,17 @@
       <div class="d-flex flex-column align-items-center justify-content-center ambilbg bg-success" style="height: 53em">
         <div class="d-flex flex-row align-items-center justify-content-center">
           <div>
-            <button class="rounded" style="font-size: 81px; color: rgb(243, 156, 18); border: 5.2px solid; padding: 15px; border-radius: 39%; opacity: 1; -webkit-text-stroke-width: 3.8px;"><i class="fa fa-chevron-left"></i></button>
+            <button id="buttonSelectLeft" class="rounded" style="font-size: 81px; color: rgb(243, 156, 18); border: 5.2px solid; padding: 15px; border-radius: 39%; opacity: 1; -webkit-text-stroke-width: 3.8px;"><i class="fa fa-chevron-left"></i></button>
           </div>
-          <div><img class="p-5" src="assets/styraidle.gif" alt="owl" style="height: 20em;"></div>
+          <div><img id="displaySelectedAvatar" class="p-5" src="assets/avatars/Styracosaurus/idle.gif" alt="owl" style="height: 14em;"></div>
           <div>
-            <button class="rounded" style="font-size: 81px; color: rgb(243, 156, 18); border: 5.2px solid; padding: 15px; border-radius: 39%; opacity: 1; -webkit-text-stroke-width: 3.8px;"><i class="fa fa-chevron-right"></i></button>
+            <button id="buttonSelectRight" class="rounded" style="font-size: 81px; color: rgb(243, 156, 18); border: 5.2px solid; padding: 15px; border-radius: 39%; opacity: 1; -webkit-text-stroke-width: 3.8px;"><i class="fa fa-chevron-right"></i></button>
           </div>
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1"></label>
           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="Enter per name here...">
+            placeholder="Enter pet name here...">
           <small id="emailHelp" class="form-text text-muted"></small>
         </div>
         <div class="d-flex flex-row align-items-center justify-content-center pt-4" style="font-size:1em">
@@ -91,7 +91,7 @@
               <div class="row pt-3">
                 <div class="col-1"><img src="assets/icons/football.png" style="height: 1.5em;"></div>
                 <div class="col-5">
-                  <div id="progressBarMakan" class="progress">
+                  <div id="progressBarMain" class="progress">
                     <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
                   </div>
                 </div>
@@ -112,8 +112,8 @@
             </div>
           </div>
         </div>
-        <div class="d-flex flex-column">
-          <div><img class="p-5" src="assets/styraidle.gif" alt="owl" style="height: 25em;"></div>
+        <div class="d-flex align-items-center" style="height: 25em;">
+          <div><img class="p-5" src="assets/avatars/Styracosaurus/idle.gif" style="height: 14em;"></div>
         </div>
         <div class="d-flex flex-column">
           <div class="card mt-3" style="width: 23em;">
@@ -128,7 +128,7 @@
               </div>
               <div class="row">
                 <div class="col-6 p-2">
-                  <button id="buttonMakan" type="button" class="btn btn-info" style="width: 10em;">Main</button>
+                  <button id="buttonMain" type="button" class="btn btn-info" style="width: 10em;">Main</button>
                 </div>
                 <div class="col-6 p-2">
                   <button id="buttonObat" type="button" class="btn btn-info" style="width: 10em;">Obat</button>
@@ -140,7 +140,6 @@
       </div>
     </div>
   </div>
-    
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="game.js"></script> 
