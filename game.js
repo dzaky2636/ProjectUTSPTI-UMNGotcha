@@ -25,8 +25,8 @@ const act = {
   main: 50,
   mainI: 10,
   mainII: 5,
-  mainD: 1,
-  mainDI: 1,
+  mainD: 20,
+  mainDI: 10,
 
   obat: 50,
   obatI: 10,
@@ -133,7 +133,7 @@ function hewanCalculateStats() {
     $("#levelDisplay").text("Dewasa");
   }
 }
-function checkIfGameOver() {
+function checkIfHewanDied() {
   //
 }
 
@@ -342,6 +342,7 @@ redrawAvatar();
 notify("Selamat datang " + hewan.nama + "!");
 
 // Bermain
+// this part is a disaster. don't touch.
 const canvas = document.getElementById('grid');
 const ctx = canvas.getContext('2d');
 
@@ -356,11 +357,16 @@ let starX = 5;
 let starY = 5;
 let isGameOver = false;
 let isGameOn = false;
+let starCountdown = 8;
+let starTaken = false;
+let randImg = 0;
 
 function startGameBermain(){
+    randImg = (Math.floor(Math.random() * (3 - 1 + 1) + 1)) - 1;
+
     speed = 3;
     tileCount = 20;
-    tileSize = canvas.clientWidth/tileCount-2;
+    tileSize = (canvas.clientWidth/tileCount-2) * 10;
     ySpeed = 0;
     xSpeed = 0;
     headX = 10;
@@ -369,6 +375,7 @@ function startGameBermain(){
     starY = 5;
     isGameOver = false;
     isGameOn = true;
+    starCountdown = 8;
     $("#activityButtonsCard").hide();
     $("#displayAvatarContainer").hide();
     $("#gameControlsCard").show();
@@ -376,6 +383,7 @@ function startGameBermain(){
     drawGame();
 }
 function exitGameBermain(){
+    notify(hewan.nama + " lelah bermain..");
     isGameOn = false;
     $("#activityButtonsCard").show();
     $("#displayAvatarContainer").show();
@@ -402,74 +410,105 @@ function checkGameOver(){
 }
 
 function clearGrid(){
-    ctx.fillStyle = 'green';
-    ctx.fillRect(0,0, canvas.clientWidth, canvas.clientHeight);
-}
-
-function checkCollision(){
-    if(starX == headX && starY == headY){
-        starX = Math.floor(Math.random()*tileCount);
-        starY = Math.floor(Math.random()*tileCount);
-        act.main += act.mainI;
+    var imgBG = new Image();
+    switch(randImg){
+      case 0: imgBG.src = "assets/bggamegrass.png"; break;
+      case 1: imgBG.src = "assets/bggamegrass2.png"; break;
+      case 2: imgBG.src = "assets/bggamedirt.png"; break;
     }
+    ctx.fillStyle = ctx.createPattern(imgBG, 'repeat');
+    ctx.fillRect(0, 0, (canvas.clientWidth * 2), canvas.clientHeight);
 }
 
 function drawPlayer(){
-    ctx.fillStyle = "orange";
-    ctx.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize);
+  ctx.fillStyle = "orange";
+  ctx.fillRect(headX * tileCount, headY*tileCount, tileSize, tileSize);
 }
 
 function drawStar(){
-    ctx.fillStyle = "red";
-    ctx.fillRect(starX*tileCount, starY*tileCount, tileSize, tileSize);
+  var imgStar = new Image();
+  imgStar.src = "assets/Yellow-Star-Transparent.png";
+  ctx.fillStyle = ctx.createPattern(imgStar, 'repeat');
+  ctx.fillRect(starX * tileCount, starY*tileCount, tileSize, tileSize);
 }
 
 function drawGame(){
-    headX = headX + xSpeed;
-    headY = headY + ySpeed;
+  headX = headX + xSpeed;
+  headY = headY + ySpeed;
 
-    if(checkGameOver()){
-        exitGameBermain();
-        return;
-    }
-    
-    clearGrid();
-    drawPlayer();
-    drawStar();
-    checkCollision();
-    setTimeout(drawGame, 1000/speed);
+  if(checkGameOver()){
+      exitGameBermain();
+      return;
+  }
+  
+  clearGrid();
+  drawPlayer();
+  drawStar();
+  checkCollision();
+  setTimeout(drawGame, 1000/speed);
 }
 
-let starCountdown = 7;
+function checkCollision(){
+  if(starX == headX && starY == headY){
+      starX = -10;
+      starY = -10;
+      act.main += act.mainI;
+      starTaken = true;
+  }
+}
+
 setInterval(function(){
-    if(isGameOn){
-        starCountdown--;
-        $("#displayNotifications").text(starCountdown + "s");
-        if(starCountdown == 0){
-            starCountdown = 7;
-            starX = Math.floor(Math.random()*tileCount);
-            starY = Math.floor(Math.random()*tileCount);
-        }
-    }
+  if(isGameOn){
+      starCountdown--;
+      $("#displayNotifications").text(starCountdown + "s");
+      if(starCountdown == 0){
+          starCountdown = 8;
+          starX = Math.floor(Math.random()*tileCount);
+          starY = Math.floor(Math.random()*tileCount);
+          if(!starTaken){
+            act.main -= act.mainD;
+          }
+          starTaken = false;
+      }
+  }
 }, 1000);
 
 document.body.addEventListener('keydown', keyInput);
-function keyInput(){
-    if(event.keyCode==38){
+function keyInput(input){
+    // atas
+    if(event.keyCode==38 || input == 38){
         ySpeed=-1;
         xSpeed=0;
-        
     }
-    if(event.keyCode == 40){
+    // bawah
+    if(event.keyCode == 40 || input == 40){
         ySpeed=1;
         xSpeed=0;
     }
-    if(event.keyCode == 37){
+    // kiri
+    if(event.keyCode == 37 || input == 37){
         ySpeed=0;
         xSpeed=-1;
     }
-    if(event.keyCode == 39){
+    // kanan
+    if(event.keyCode == 39 || input == 39){
         ySpeed=0;
         xSpeed=1;
     }
 }
+
+$("#mainExitButton").click(function(){
+  exitGameBermain();
+});
+$("#buttonMoveAtas").click(function(){
+  keyInput(38);
+});
+$("#buttonMoveBawah").click(function(){
+  keyInput(40);
+});
+$("#buttonMoveKiri").click(function(){
+  keyInput(37);
+});
+$("#buttonMoveKanan").click(function(){
+  keyInput(39);
+});
