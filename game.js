@@ -204,9 +204,9 @@ function tidurActivity(){
 }
 function mainActivity(){
     if(mainState && act.main <= 100){
-        act.main += act.mainI;
+        // act.main += act.mainI;
     }else if(!mainState && act.main > 0){
-        act.main -= act.mainD;  
+        // act.main -= act.mainD;  
     }
     $("#progressBarMain").children().attr("style", "width: " + ((100 * act.main) / 100) + "%");
 }
@@ -345,18 +345,136 @@ redrawAvatar();
 notify("Selamat datang " + hewan.nama  + "!");
 
 // Bermain
+const canvas = document.getElementById('grid');
+const ctx = canvas.getContext('2d');
+
+let speed = 3;
+let tileCount = 20;
+let tileSize = canvas.clientWidth/tileCount-2;
+let ySpeed = 0;
+let xSpeed = 0;
+let headX = 10;
+let headY = 10;
+let starX = 5;
+let starY = 5;
+let isGameOver = false;
+let isGameOn = false;
+
 function startGameBermain(){
+    speed = 3;
+    tileCount = 20;
+    tileSize = canvas.clientWidth/tileCount-2;
+    ySpeed = 0;
+    xSpeed = 0;
+    headX = 10;
+    headY = 10;
+    starX = 5;
+    starY = 5;
+    isGameOver = false;
+    isGameOn = true;
     $("#activityButtonsCard").hide();
     $("#displayAvatarContainer").hide();
     $("#gameControlsCard").show();
     $("#grid").show();
+    drawGame();
 }
 function exitGameBermain(){
+    isGameOn = false;
     $("#activityButtonsCard").show();
     $("#displayAvatarContainer").show();
     $("#gameControlsCard").hide();
     $("#grid").hide();
     redrawAvatar();
+}
+
+function checkGameOver(){
+    if(ySpeed === 0 && xSpeed === 0){
+        return false;
+    }
+
+    if(headX < 0 || headY < 0 || headX === tileCount || headY === tileCount) 
+        isGameOver = true;
+
+    if(isGameOver){
+        ctx.fillStyle = "black";
+        ctx.font="50px verdana";
+        ctx.fillText("Game Over! ", canvas.clientWidth/6.5, canvas.clientHeight/2);
+    }
+
+    return isGameOver;
+}
+
+function clearGrid(){
+    ctx.fillStyle = 'green';
+    ctx.fillRect(0,0, canvas.clientWidth, canvas.clientHeight);
+}
+
+function checkCollision(){
+    if(starX == headX && starY == headY){
+        starX = Math.floor(Math.random()*tileCount);
+        starY = Math.floor(Math.random()*tileCount);
+        act.main += act.mainI;
+    }
+}
+
+function drawPlayer(){
+    ctx.fillStyle = "orange";
+    ctx.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize);
+}
+
+function drawStar(){
+    ctx.fillStyle = "red";
+    ctx.fillRect(starX*tileCount, starY*tileCount, tileSize, tileSize);
+}
+
+function drawGame(){
+    headX = headX + xSpeed;
+    headY = headY + ySpeed;
+
+    if(checkGameOver()){
+        exitGameBermain();
+        return;
+    }
+    
+    clearGrid();
+    drawPlayer();
+    drawStar();
+    checkCollision();
+    setTimeout(drawGame, 1000/speed);
+}
+
+let starCountdown = 7;
+setInterval(function(){
+    if(isGameOn){
+        starCountdown--;
+        $("#displayNotifications").text(starCountdown + "s");
+        if(starCountdown == 0){
+            starCountdown = 7;
+            starX = Math.floor(Math.random()*tileCount);
+            starY = Math.floor(Math.random()*tileCount);
+        }
+    }
+}, 1000);
+
+document.body.addEventListener('keydown', keyInput);
+function keyInput(){
+    if(event.keyCode==38){
+        ySpeed=-1;
+        xSpeed=0;
+        
+    }
+    if(event.keyCode == 40){
+        ySpeed=1;
+        xSpeed=0;
+    }
+    if(event.keyCode == 37){
+        ySpeed=0;
+        xSpeed=-1;
+    }
+    if(event.keyCode == 39){
+        ySpeed=0;
+        xSpeed=1;
+    }
 }
 
 $("#mainExitButton").click(function(){
