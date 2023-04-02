@@ -221,7 +221,9 @@
             namaHewan = $("#inputNamaHewan").val();
             $("#namaAvatarDisplay").text(namaHewan);
 
-            $.getScript("game.js");
+            jsScript = document.createElement('script');
+            jsScript.setAttribute("src", "game.js");
+            document.body.appendChild(jsScript);
             $("#halamanStart").toggle();
             $("#halamanGame").toggle();
         });
