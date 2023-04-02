@@ -1,30 +1,64 @@
 // Konfigurasi hewan
 const hewan = {
-    level: 1,
-    makan: 50,
-    tidur: 50,
-    main: 50,
-    obat: 50,
-    xp: 0
+    nama: "Hank",
+    level: 1
 }
 
-activityActive = false;
-makanState = false;
-tidurState = false;
-mainState = false;
-obatState = false;
+const act = {
+    // I = Jumlah naik saat aktivitas dilakukan
+    // II = Jumlah naik saat aktivitas dilakukan, di increment ini saat naik level
+    // D = Jumlah turun saat aktivitas tidak dilakukan
+    // DI = Jumlah turun saat aktivitas tidak dilakukan, di increment ini saat naik level
+    makan: 50,
+    makanI: 10,
+    makanII: 5,
+    makanD: 1,
+    makanDI: 1,
+
+    tidur: 50,
+    tidurI: 10,
+    tidurII: 5,
+    tidurD: 1,
+    tidurDI: 1,
+
+    main: 50,
+    mainI: 10,
+    mainII: 5,
+    mainD: 1,
+    mainDI: 1,
+
+    obat: 50,
+    obatI: 10,
+    obatII: 5,
+    obatD: 1,
+    obatDI: 1,
+}
+
+const xp = {
+    xp: 0,  // xp saat mulai
+    xpI: 1, // xp naik berapa per detik
+    xpLevelUp: 60,  // xp diperlukan untuk naik lvl
+    xpIncrement: 30 // xpLevelUp ditambah ini tiap naik level
+}
 
 // Simulasi jam
+let day = 1;
 let hour = 12; 
 let minutes = 0;
 setInterval(function(){
     minutes += 10;
-    if(minutes >= 60){ minutes = 0; hour++; }
-    if(hour >= 24){ hour = 0; }
-    if(minutes < 10){ printMinutes = minutes.toString().padStart(2, '0');}
-    else{ printMinutes = minutes.toString(); } 
-    if(hour < 10){ printHour = hour.toString().padStart(2, '0'); }
-    else{ printHour = hour.toString(); } 
+    if(minutes >= 60){ 
+        minutes = 0; 
+        hour++; 
+    }
+    if(hour >= 24){ 
+        hour = 0; 
+        notify("Sekarang hari ke-" + day + "..");
+    }
+    if(minutes < 10) printMinutes = minutes.toString().padStart(2, '0');
+    else printMinutes = minutes.toString(); 
+    if(hour < 10) printHour = hour.toString().padStart(2, '0');
+    else printHour = hour.toString(); 
 
     if(hour > 19 || hour < 6){
         $("#backgroundImage").attr("style", "background-image: url('assets/bgforestnight.jpg'); height: 53em");
@@ -43,86 +77,52 @@ setInterval(function(){
     obatActivity();
     mainActivity();
     progressBarColor();
+    if(hewan.level < 4) xpCalculate();
 }, 1000);
 
-// Pilih Avatar
-avatarSelectIndex = 0;
-$("#buttonSelectLeft").click(function(){
-    avatarSelectIndex--;
-    if(avatarSelectIndex <= -1) avatarSelectIndex = 2;
-    selectCharacter(avatarSelectIndex);
-});
-$("#buttonSelectRight").click(function(){
-    avatarSelectIndex++; 
-    if(avatarSelectIndex >= 3) avatarSelectIndex = 0;
-    selectCharacter(avatarSelectIndex);
-});
-function selectCharacter(index){
-    switch(index){
-        case 0: $("#displaySelectedAvatar").attr("src", "assets/avatars/Styracosaurus/idle.gif"); break;
-        case 1: $("#displaySelectedAvatar").attr("src", "assets/avatars/Carnotaurus/idle.gif"); break;
-        case 2: $("#displaySelectedAvatar").attr("src", "assets/avatars/Baryonyx/idle.gif"); break;
+// Kalkulasi
+function xpCalculate(){
+    xp.xp += xp.xpI;
+    if(xp.xp >= xp.xpLevelUp){
+        xp.xp = 0;
+        xp.xpLevelUp += xp.xpIncrement;
+        hewan.level++;
+        hewanCalculateStats();
     }
 }
-
-// Display
-function progressBarColor(){
-    barMakan = $("#progressBarMakan").children();
-    if(hewan.makan <= 25){
-        if(makanState) barMakan.attr("class", "progress-bar bg-danger progress-bar-striped progress-bar-animated");
-        else barMakan.attr("class", "progress-bar bg-danger");
-    }else if(hewan.makan <= 50){
-        if(makanState) barMakan.attr("class", "progress-bar bg-warning progress-bar-striped progress-bar-animated");
-        else barMakan.attr("class", "progress-bar bg-warning");
-    }else{
-        if(makanState) barMakan.attr("class", "progress-bar bg-success progress-bar-striped progress-bar-animated");
-        else barMakan.attr("class", "progress-bar bg-success");
+function hewanCalculateStats(){
+    if(hewan.level == 1){
+        $("#levelDisplay").text("Bayi");
+    }else if(hewan.level == 2){
+        act.makanI += act.makanII;
+        act.makanD += act.makanDI;
+        act.tidurI += act.tidurII;
+        act.tidurD += act.tidurDI;
+        act.mainI += act.mainII;
+        act.mainD += act.mainDI;
+        act.obatI += act.obatII;
+        act.obatD += act.obatDI;
+        $("#displayNotifications").text(hewan.nama + " naik level menjadi Remaja!");
+        $("#levelDisplay").text("Remaja");
+    }else if(hewan.level == 3){
+        act.makanI += act.makanII;
+        act.makanD += act.makanDI;
+        act.tidurI += act.tidurII;
+        act.tidurD += act.tidurDI;
+        act.mainI += act.mainII;
+        act.mainD += act.mainDI;
+        act.obatI += act.obatII;
+        act.obatD += act.obatDI;
+        $("#displayNotifications").text(hewan.nama + " naik level menjadi Dewasa!");
+        $("#levelDisplay").text("Dewasa");
     }
-
-    barTidur = $("#progressBarTidur").children();
-    if(hewan.tidur <= 25){
-        if(tidurState) barTidur.attr("class", "progress-bar bg-danger progress-bar-striped progress-bar-animated");
-        else barTidur.attr("class", "progress-bar bg-danger");
-    }else if(hewan.tidur <= 50){
-        if(tidurState) barTidur.attr("class", "progress-bar bg-warning progress-bar-striped progress-bar-animated");
-        else barTidur.attr("class", "progress-bar bg-warning");
-    }else{
-        if(tidurState) barTidur.attr("class", "progress-bar bg-success progress-bar-striped progress-bar-animated");
-        else barTidur.attr("class", "progress-bar bg-success");
-    }
-
-    barMain = $("#progressBarMain").children();
-    if(hewan.main <= 25){
-        if(mainState) barMain.attr("class", "progress-bar bg-danger progress-bar-striped progress-bar-animated");
-        else barMain.attr("class", "progress-bar bg-danger");
-    }else if(hewan.main <= 50){
-        if(mainState) barMain.attr("class", "progress-bar bg-warning progress-bar-striped progress-bar-animated");
-        else barMain.attr("class", "progress-bar bg-warning");
-    }else{
-        if(mainState) barMain.attr("class", "progress-bar bg-success progress-bar-striped progress-bar-animated");
-        else barMain.attr("class", "progress-bar bg-success");
-    }
-    
-    barObat = $("#progressBarObat").children();
-    if(hewan.obat <= 25){
-        if(obatState) barObat.attr("class", "progress-bar bg-danger progress-bar-striped progress-bar-animated");
-        else barObat.attr("class", "progress-bar bg-danger");
-    }else if(hewan.obat <= 50){
-        if(obatState) barObat.attr("class", "progress-bar bg-warning progress-bar-striped progress-bar-animated");
-        else barObat.attr("class", "progress-bar bg-warning");
-    }else{
-        if(obatState) barObat.attr("class", "progress-bar bg-success progress-bar-striped progress-bar-animated");
-        else barObat.attr("class", "progress-bar bg-success");
-    }
-}
-function redrawButtons(){
-    if(!makanState) $("#buttonMakan").attr("class", "btn btn-info"); else $("#buttonMakan").attr("class", "btn btn-success");
-    if(!tidurState) $("#buttonTidur").attr("class", "btn btn-info"); else $("#buttonTidur").attr("class", "btn btn-success");
-    if(!mainState) $("#buttonMain").attr("class", "btn btn-info"); else $("#buttonMain").attr("class", "btn btn-success");
-    if(!obatState) $("#buttonObat").attr("class", "btn btn-info"); else $("#buttonObat").attr("class", "btn btn-success");
 }
 
 // Tombol Aktivitas & Aktivitas
+let makanState = false;
+let tidurState = false;
+let mainState = false;
+let obatState = false;
 $("#buttonMakan").click(function(){
     if(makanState){
         makanState = false;
@@ -160,34 +160,94 @@ $("#buttonObat").click(function(){
     redrawButtons();
 });
 function makanActivity(){
-    if(makanState && hewan.makan <= 100){
-        hewan.makan += 4;
-    }else if(!makanState && hewan.makan > 0){
-        hewan.makan -= 4;      
+    if(makanState && act.makan <= 100){
+        act.makan += act.makanI;
+    }else if(!makanState && act.makan > 0){
+        act.makan -= act.makanD;      
     }
-    $("#progressBarMakan").children().attr("style", "width: " + ((100 * hewan.makan) / 100) + "%");
+    $("#progressBarMakan").children().attr("style", "width: " + ((100 * act.makan) / 100) + "%");
 }
 function tidurActivity(){
-    if(tidurState && hewan.tidur <= 100){
-        hewan.tidur += 5;
-    }else if(!tidurState && hewan.tidur > 0){
-        hewan.tidur -= 2.5;  
+    if(tidurState && act.tidur <= 100){
+        act.tidur += act.tidurI;
+    }else if(!tidurState && act.tidur > 0){
+        act.tidur-= act.tidurD;  
     }
-    $("#progressBarTidur").children().attr("style", "width: " + ((100 * hewan.tidur) / 100) + "%");
+    $("#progressBarTidur").children().attr("style", "width: " + ((100 * act.tidur) / 100) + "%");
 }
 function mainActivity(){
-    if(mainState && hewan.main <= 100){
-        hewan.main += 5;
-    }else if(!mainState && hewan.main > 0){
-        hewan.main -= 2.5;  
+    if(mainState && act.main <= 100){
+        act.main += act.mainI;
+    }else if(!mainState && act.main > 0){
+        act.main -= act.mainD;  
     }
-    $("#progressBarMain").children().attr("style", "width: " + ((100 * hewan.main) / 100) + "%");
+    $("#progressBarMain").children().attr("style", "width: " + ((100 * act.main) / 100) + "%");
 }
 function obatActivity(){
-    if(obatState && hewan.obat <= 100){
-        hewan.obat += 5;
-    }else if(!obatState && hewan.obat > 0){
-        hewan.obat -= 1;  
+    if(obatState && act.obat <= 100){
+        act.obat += act.obatI;
+    }else if(!obatState && act.obat > 0){
+        act.obat -= act.obatD;  
     }
-    $("#progressBarObat").children().attr("style", "width: " + ((100 * hewan.obat) / 100) + "%");
+    $("#progressBarObat").children().attr("style", "width: " + ((100 * act.obat) / 100) + "%");
+}
+
+// Display
+function progressBarColor(){
+    barMakan = $("#progressBarMakan").children();
+    if(act.makan <= 25){
+        if(makanState) barMakan.attr("class", "progress-bar bg-danger progress-bar-striped progress-bar-animated");
+        else barMakan.attr("class", "progress-bar bg-danger");
+    }else if(act.makan <= 50){
+        if(makanState) barMakan.attr("class", "progress-bar bg-warning progress-bar-striped progress-bar-animated");
+        else barMakan.attr("class", "progress-bar bg-warning");
+    }else{
+        if(makanState) barMakan.attr("class", "progress-bar bg-success progress-bar-striped progress-bar-animated");
+        else barMakan.attr("class", "progress-bar bg-success");
+    }
+
+    barTidur = $("#progressBarTidur").children();
+    if(act.tidur <= 25){
+        if(tidurState) barTidur.attr("class", "progress-bar bg-danger progress-bar-striped progress-bar-animated");
+        else barTidur.attr("class", "progress-bar bg-danger");
+    }else if(act.tidur <= 50){
+        if(tidurState) barTidur.attr("class", "progress-bar bg-warning progress-bar-striped progress-bar-animated");
+        else barTidur.attr("class", "progress-bar bg-warning");
+    }else{
+        if(tidurState) barTidur.attr("class", "progress-bar bg-success progress-bar-striped progress-bar-animated");
+        else barTidur.attr("class", "progress-bar bg-success");
+    }
+
+    barMain = $("#progressBarMain").children();
+    if(act.main <= 25){
+        if(mainState) barMain.attr("class", "progress-bar bg-danger progress-bar-striped progress-bar-animated");
+        else barMain.attr("class", "progress-bar bg-danger");
+    }else if(act.main <= 50){
+        if(mainState) barMain.attr("class", "progress-bar bg-warning progress-bar-striped progress-bar-animated");
+        else barMain.attr("class", "progress-bar bg-warning");
+    }else{
+        if(mainState) barMain.attr("class", "progress-bar bg-success progress-bar-striped progress-bar-animated");
+        else barMain.attr("class", "progress-bar bg-success");
+    }
+    
+    barObat = $("#progressBarObat").children();
+    if(act.obat <= 25){
+        if(obatState) barObat.attr("class", "progress-bar bg-danger progress-bar-striped progress-bar-animated");
+        else barObat.attr("class", "progress-bar bg-danger");
+    }else if(act.obat <= 50){
+        if(obatState) barObat.attr("class", "progress-bar bg-warning progress-bar-striped progress-bar-animated");
+        else barObat.attr("class", "progress-bar bg-warning");
+    }else{
+        if(obatState) barObat.attr("class", "progress-bar bg-success progress-bar-striped progress-bar-animated");
+        else barObat.attr("class", "progress-bar bg-success");
+    }
+}
+function redrawButtons(){
+    if(!makanState) $("#buttonMakan").attr("class", "btn btn-info"); else $("#buttonMakan").attr("class", "btn btn-success");
+    if(!tidurState) $("#buttonTidur").attr("class", "btn btn-info"); else $("#buttonTidur").attr("class", "btn btn-success");
+    if(!mainState) $("#buttonMain").attr("class", "btn btn-info"); else $("#buttonMain").attr("class", "btn btn-success");
+    if(!obatState) $("#buttonObat").attr("class", "btn btn-info"); else $("#buttonObat").attr("class", "btn btn-success");
+}
+function notify(message){
+    $("#displayNotifications").text(message);
 }

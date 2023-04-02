@@ -33,7 +33,7 @@
     </div>
 
 
-    <div class="row">
+    <div id="halamanStart" class="row">
       <div class="d-flex flex-column align-items-center justify-content-center ambilbg bg-success" style="height: 53em">
         <div class="d-flex flex-row align-items-center justify-content-center">
           <div>
@@ -45,28 +45,25 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="exampleInputEmail1"></label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="Enter pet name here...">
-          <small id="emailHelp" class="form-text text-muted"></small>
+          <input id="inputNamaHewan" type="text" class="form-control" placeholder="Masukkan nama pet..." oninput="JavaScript:checkInputNama()">;
         </div>
-        <div class="d-flex flex-row align-items-center justify-content-center pt-4" style="font-size:1em">
-          <button class="btnmulai" type="button">MULAI</button>
+        <div id="buttonMulaiContainer" class="d-flex flex-row align-items-center justify-content-center pt-4" style="font-size:1em; height: 1em;">
+          <button id="buttonMulai" class="btnmulai" type="button">MULAI</button>
         </div>
       </div>
     </div>
 
-    <div class="row">
+    <div id="halamanGame" class="row">
       <div id="backgroundImage" class="d-flex flex-column align-items-center ambilbg bg-success" style="height: 53em">
         <div class="d-flex flex-column">
           <div class="card mt-3" style="width: 30em;">
             <div class="card-header">
               <div class="row">
                 <div class="col-4">
-                  <div class="text-start fs-5">Nama Avatar</div>
+                  <div id="namaAvatarDisplay" class="text-start fs-5">Nama Avatar</div>
                 </div>
                 <div class="col-4">
-                  <div class="text-center fs-5">Bayi</div>
+                  <div id="levelDisplay" class="text-center fs-5">Bayi</div>
                 </div>
                 <div class="col-4">
                   <div id="hourDisplay" class="text-end fs-5">Jam: 00:00</div>
@@ -78,13 +75,13 @@
                 <div class="col-1"><img src="assets/icons/restaurant.png" style="height: 1.5em;"></div>
                 <div class="col-5">
                   <div id="progressBarMakan" class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 50%"></div>
                   </div>
                 </div>
                 <div class="col-1"><img src="assets/icons/bed.png" style="height: 1.5em;"></div>
                 <div class="col-5">
                   <div id="progressBarTidur" class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 50%"></div>
                   </div>
                 </div>
               </div>
@@ -92,13 +89,13 @@
                 <div class="col-1"><img src="assets/icons/football.png" style="height: 1.5em;"></div>
                 <div class="col-5">
                   <div id="progressBarMain" class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 50%"></div>
                   </div>
                 </div>
                 <div class="col-1"><img src="assets/icons/drugs.png" style="height: 1.3em;"></div>
                 <div class="col-5">
                   <div id="progressBarObat" class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 50%"></div>
                   </div>
                 </div>
               </div>
@@ -141,8 +138,50 @@
     </div>
   </div>
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="game.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script>
+      window.onload = function(){
+        $("#halamanGame").toggle();
+      }
+
+      // Halaman pilih avatar dan nama, panggil script js saat tekan tombol mulai
+        avatarSelectIndex = 0;
+        $("#buttonSelectLeft").click(function(){
+            avatarSelectIndex--;
+            if(avatarSelectIndex <= -1) avatarSelectIndex = 2;
+            selectCharacter(avatarSelectIndex);
+        });
+        $("#buttonSelectRight").click(function(){
+            avatarSelectIndex++; 
+            if(avatarSelectIndex >= 3) avatarSelectIndex = 0;
+            selectCharacter(avatarSelectIndex);
+        });
+        function selectCharacter(index){
+            switch(index){
+                case 0: $("#displaySelectedAvatar").attr("src", "assets/avatars/Styracosaurus/idle.gif"); break;
+                case 1: $("#displaySelectedAvatar").attr("src", "assets/avatars/Carnotaurus/idle.gif"); break;
+                case 2: $("#displaySelectedAvatar").attr("src", "assets/avatars/Baryonyx/idle.gif"); break;
+            }
+        }
+        function checkInputNama(){
+            inputNamaLen = $("#inputNamaHewan").val().length;
+            if(document.contains(document.getElementById("buttonMulai"))){
+                document.getElementById("buttonMulai").remove();
+            }
+            if(inputNamaLen != 0){
+                $("#buttonMulaiContainer").append('<button id="buttonMulai" class="btnmulai" type="button">MULAI</button>');
+            }
+        }
+        $(document).on('click', '#buttonMulai', function() {
+            namaHewan = $("#inputNamaHewan").val();
+            $("#namaAvatarDisplay").text(namaHewan);
+
+            $.getScript("game.js");
+            $("#halamanStart").toggle();
+            $("#halamanGame").toggle();
+        });
+    </script>
 </body>
 </html
