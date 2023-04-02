@@ -1,7 +1,8 @@
 // Konfigurasi hewan
 const hewan = {
-    nama: "Hank",
-    level: 1
+    nama: "Default",
+    level: 1,
+    avatar: 0
 }
 
 const act = {
@@ -37,22 +38,31 @@ const act = {
 const xp = {
     xp: 0,  // xp saat mulai
     xpI: 1, // xp naik berapa per detik
-    xpLevelUp: 60,  // xp diperlukan untuk naik lvl
-    xpIncrement: 30 // xpLevelUp ditambah ini tiap naik level
+    xpLevelUp: 40,  // xp diperlukan untuk naik lvl
+    xpIncrement: 50 // xpLevelUp ditambah ini tiap naik level
 }
+
+let deathState = false;
+let makanState = false;
+let tidurState = false;
+let mainState = false;
+let obatState = false;
 
 // Simulasi jam
 let day = 1;
-let hour = 12; 
+let hour = 8; 
 let minutes = 0;
 setInterval(function(){
-    minutes += 10;
+    if(!tidurState) minutes += 5;
+    else minutes += 15;
+
     if(minutes >= 60){ 
-        minutes = 0; 
+        minutes = minutes - 60; 
         hour++; 
     }
     if(hour >= 24){ 
         hour = 0; 
+        day++;
         notify("Sekarang hari ke-" + day + "..");
     }
     if(minutes < 10) printMinutes = minutes.toString().padStart(2, '0');
@@ -60,12 +70,18 @@ setInterval(function(){
     if(hour < 10) printHour = hour.toString().padStart(2, '0');
     else printHour = hour.toString(); 
 
-    if(hour > 19 || hour < 6){
+    if(hour == 19){
         $("#backgroundImage").attr("style", "background-image: url('assets/bgforestnight.jpg'); height: 53em");
-    }else if(hour > 15){
+        notify("Selamat malam " + hewan.nama + "!");
+    }else if(hour == 15){
         $("#backgroundImage").attr("style", "background-image: url('assets/bgforestevening.jpg'); height: 53em");
-    }else{
+        notify("Selamat sore " + hewan.nama + "!");
+    }else if(hour == 12){
         $("#backgroundImage").attr("style", "background-image: url('assets/bgforestday.jpg'); height: 53em");
+        notify("Selamat siang " + hewan.nama + "!");
+    }else if(hour == 5){
+        $("#backgroundImage").attr("style", "background-image: url('assets/bgforestevening.jpg'); height: 53em");
+        notify("Selamat pagi " + hewan.nama + "!");
     }
     document.getElementById("hourDisplay").innerHTML = "Jam: " + printHour + ":" + printMinutes;
 }, 1000);
@@ -78,6 +94,7 @@ setInterval(function(){
     mainActivity();
     progressBarColor();
     if(hewan.level < 4) xpCalculate();
+    console.log(hewan.avatar);
 }, 1000);
 
 // Kalkulasi
@@ -102,7 +119,7 @@ function hewanCalculateStats(){
         act.mainD += act.mainDI;
         act.obatI += act.obatII;
         act.obatD += act.obatDI;
-        $("#displayNotifications").text(hewan.nama + " naik level menjadi Remaja!");
+        notify(hewan.nama + " naik level menjadi Remaja!");
         $("#levelDisplay").text("Remaja");
     }else if(hewan.level == 3){
         act.makanI += act.makanII;
@@ -113,16 +130,12 @@ function hewanCalculateStats(){
         act.mainD += act.mainDI;
         act.obatI += act.obatII;
         act.obatD += act.obatDI;
-        $("#displayNotifications").text(hewan.nama + " naik level menjadi Dewasa!");
+        notify(hewan.nama + " naik level menjadi Dewasa!");
         $("#levelDisplay").text("Dewasa");
     }
 }
 
 // Tombol Aktivitas & Aktivitas
-let makanState = false;
-let tidurState = false;
-let mainState = false;
-let obatState = false;
 $("#buttonMakan").click(function(){
     if(makanState){
         makanState = false;
@@ -131,6 +144,7 @@ $("#buttonMakan").click(function(){
         makanState = true;
     }
     redrawButtons();
+    redrawAvatar();
 });
 $("#buttonTidur").click(function(){
     if(tidurState){ 
@@ -140,6 +154,7 @@ $("#buttonTidur").click(function(){
         tidurState = true;
     }
     redrawButtons();
+    redrawAvatar();
 });
 $("#buttonMain").click(function(){
     if(mainState){ 
@@ -149,6 +164,7 @@ $("#buttonMain").click(function(){
         mainState = true;
     }
     redrawButtons();
+    redrawAvatar();
 });
 $("#buttonObat").click(function(){
     if(obatState){
@@ -158,6 +174,7 @@ $("#buttonObat").click(function(){
         obatState = true;
     }
     redrawButtons();
+    redrawAvatar();
 });
 function makanActivity(){
     if(makanState && act.makan <= 100){
@@ -195,6 +212,7 @@ function obatActivity(){
 // Display
 function progressBarColor(){
     barMakan = $("#progressBarMakan").children();
+    console.log("progress: " + makanState);
     if(act.makan <= 25){
         if(makanState) barMakan.attr("class", "progress-bar bg-danger progress-bar-striped progress-bar-animated");
         else barMakan.attr("class", "progress-bar bg-danger");
@@ -248,6 +266,71 @@ function redrawButtons(){
     if(!mainState) $("#buttonMain").attr("class", "btn btn-info"); else $("#buttonMain").attr("class", "btn btn-success");
     if(!obatState) $("#buttonObat").attr("class", "btn btn-info"); else $("#buttonObat").attr("class", "btn btn-success");
 }
+function redrawAvatar(){
+    if(document.contains(document.getElementById("displayAvatar"))){
+        document.getElementById("displayAvatar").remove();
+    }
+
+    let avatarHeight;
+    switch(hewan.level){
+        case 1: avatarHeight = 12; break;
+        case 2: avatarHeight = 16; break;
+        case 3: avatarHeight = 20; break;
+    }
+
+    switch(hewan.avatar){
+        case 0:
+            if(deathState)
+                $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + (avatarHeight * 9) + '" autoplay="autoplay"><source src="assets/avatars/Styracosaurus/death.webm" type="video/webm" /></video>');
+            else if(!makanState && !tidurState && !mainState && !obatState) 
+                $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Styracosaurus/idle.gif" style="height: ' + avatarHeight + 'em;">');
+            else if(makanState) 
+                $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Styracosaurus/atack.gif" style="height: ' + avatarHeight + 'em;">');
+            else if(tidurState)
+                $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + (avatarHeight * 9) + '" autoplay="autoplay"><source src="assets/avatars/Styracosaurus/death.webm" type="video/webm" /></video>');
+            else if(mainState) 
+                $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Styracosaurus/cry.gif" style="height: ' + avatarHeight + 'em;">');
+            else if(obatState) 
+                $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Styracosaurus/cry.gif" style="height: ' + avatarHeight + 'em;">');
+            break;
+        case 1:
+            if(deathState)
+                $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + (avatarHeight * 9) + '" autoplay="autoplay"><source src="assets/avatars/Carnotaurus/death.webm" type="video/webm" /></video>');
+            else if(!makanState && !tidurState && !mainState && !obatState) 
+                $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Carnotaurus/idle.gif" style="height: ' + avatarHeight + 'em;">');
+            else if(makanState) 
+                $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Carnotaurus/atack.gif" style="height: ' + avatarHeight + 'em;">');
+            else if(tidurState)
+                $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + (avatarHeight * 9) + '" autoplay="autoplay"><source src="assets/avatars/Carnotaurus/death.webm" type="video/webm" /></video>');
+            else if(mainState) 
+                $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Carnotaurus/cry.gif" style="height: ' + avatarHeight + 'em;">');
+            else if(obatState) 
+                $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Carnotaurus/cry.gif" style="height: ' + avatarHeight + 'em;">');
+            break;
+        case 2:
+            if(deathState)
+                $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + (avatarHeight * 9) + '" autoplay="autoplay"><source src="assets/avatars/Baryonyx/death.webm" type="video/webm" /></video>');
+            else if(!makanState && !tidurState && !mainState && !obatState) 
+                $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Baryonyx/idle.gif" style="height: ' + avatarHeight + 'em;">');
+            else if(makanState) 
+                $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Baryonyx/atack.gif" style="height: ' + avatarHeight + 'em;">');
+            else if(tidurState)
+                $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + (avatarHeight * 9) + '" autoplay="autoplay"><source src="assets/avatars/Baryonyx/death.webm" type="video/webm" /></video>');
+            else if(mainState) 
+                $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Baryonyx/cry.gif" style="height: ' + avatarHeight + 'em;">');
+            else if(obatState) 
+                $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Baryonyx/cry.gif" style="height: ' + avatarHeight + 'em;">');
+            break;
+    }
+}
 function notify(message){
+    redrawAvatar();
     $("#displayNotifications").text(message);
 }
+
+// Saat mulai
+hewan.nama = namaHewan;
+hewan.avatar = avatarSelectIndex;
+progressBarColor();
+redrawAvatar();
+notify("Selamat datang " + hewan.nama  + "!");
