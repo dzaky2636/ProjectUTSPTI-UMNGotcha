@@ -93,8 +93,7 @@ setInterval(function(){
     obatActivity();
     mainActivity();
     progressBarColor();
-    if(hewan.level < 4) xpCalculate();
-    console.log(hewan.avatar);
+    if(hewan.level < 3) xpCalculate();
 }, 1000);
 
 // Kalkulasi
@@ -134,6 +133,9 @@ function hewanCalculateStats(){
         $("#levelDisplay").text("Dewasa");
     }
 }
+function checkIfGameOver(){
+    //
+}
 
 // Tombol Aktivitas & Aktivitas
 $("#buttonMakan").click(function(){
@@ -163,8 +165,16 @@ $("#buttonMain").click(function(){
         makanState = tidurState = obatState = false;
         mainState = true;
     }
+
     redrawButtons();
     redrawAvatar();
+
+    if(mainState){
+        startGameBermain();
+    }else{
+        exitGameBermain();
+    }
+    
 });
 $("#buttonObat").click(function(){
     if(obatState){
@@ -212,7 +222,6 @@ function obatActivity(){
 // Display
 function progressBarColor(){
     barMakan = $("#progressBarMakan").children();
-    console.log("progress: " + makanState);
     if(act.makan <= 25){
         if(makanState) barMakan.attr("class", "progress-bar bg-danger progress-bar-striped progress-bar-animated");
         else barMakan.attr("class", "progress-bar bg-danger");
@@ -334,3 +343,32 @@ hewan.avatar = avatarSelectIndex;
 progressBarColor();
 redrawAvatar();
 notify("Selamat datang " + hewan.nama  + "!");
+
+// Bermain
+function startGameBermain(){
+    $("#activityButtonsCard").hide();
+    $("#displayAvatarContainer").hide();
+    $("#gameControlsCard").show();
+    $("#grid").show();
+}
+function exitGameBermain(){
+    $("#activityButtonsCard").show();
+    $("#displayAvatarContainer").show();
+    $("#gameControlsCard").hide();
+    $("#grid").hide();
+    redrawAvatar();
+}
+
+$("#mainExitButton").click(function(){
+    if(mainState){ 
+        mainState = false;
+    }else{
+        makanState = tidurState = obatState = false;
+        mainState = true;
+    }
+
+    redrawButtons();
+    redrawAvatar();
+
+    exitGameBermain();
+})
