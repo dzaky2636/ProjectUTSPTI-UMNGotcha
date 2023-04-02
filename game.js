@@ -421,7 +421,13 @@ function clearGrid(){
 }
 
 function drawPlayer(){
-  ctx.fillStyle = "orange";
+  var imgPlayer = new Image();
+  switch(hewan.avatar){
+    case 0: imgPlayer.src = "assets/Idle_001.png"; break;
+    case 1: imgPlayer.src = "assets/Idle_002.png"; break;
+    case 2: imgPlayer.src = "assets/Idle_003.png"; break;
+  }
+  ctx.fillStyle = ctx.createPattern(imgPlayer, 'repeat');
   ctx.fillRect(headX * tileCount, headY*tileCount, tileSize, tileSize);
 }
 
