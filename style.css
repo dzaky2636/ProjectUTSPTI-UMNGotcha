@@ -169,3 +169,7 @@
 ::-webkit-input-placeholder {
   text-align: center;
 }
+
+:-moz-placeholder {
+  text-align: center;
+}
