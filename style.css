@@ -80,8 +80,8 @@
   border-radius: 7px;
   overflow: hidden;
 }
-
-.btnmulai {
+/* Pilihan button pertama */
+/* .btnmulai {
   backface-visibility: hidden;
   position: relative;
   cursor: pointer;
@@ -99,7 +99,44 @@
   font-weight: 900;
   font-style: normal;
   text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.3);
+} */
+
+/* Pilihan button kedua */
+.btnmulai {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100px;
+  height: 50px;
+  border: 1px solid white;
+  border-radius: 100px;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  position: relative;
 }
+.btnmulai:hover {
+  background-color: white;
+  color: black;
+  transition: 2s ease;
+}
+
+.btnmulai::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50px;
+  background: transparent;
+  height: 50%;
+  width: 100%;
+  transform: perspective(1em) rotateX(48deg) scale(1, 0.35);
+  filter: blur(8px);
+  transition: 1s ease;
+}
+
+.btnmulai:hover::before {
+  background: white;
+  top: 70px;
+}
+
 .tulisanumn {
   color: #fff;
   text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6 0 0 30px #0073e6, 0 0 35px #0073e6;
@@ -145,6 +182,30 @@
   border-color: #3c4fe0;
   box-shadow: 0 1px 0 0 rgb(35 38 59 / 5%);
 } */
+::selection {
+  background: #07da11;
+  color: #fff;
+}
+
+.ucapan {
+  animation: typing 3.5s steps(40, end), 0.75s step-end infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-family: monospace;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
 
 /* Pilihan Ketiga Desain CSS Input Nama Halaman Utama */
 #inputNamaHewan:invalid {
@@ -161,6 +222,12 @@
   75% {
     transform: translateX(4px);
   }
+}
+#inputNamaHewan::placeholder {
+  color: green;
+}
+::-ms-input-placeholder {
+  color: green;
 }
 #inputNamaHewan {
   font-size: 14px;
@@ -195,4 +262,17 @@
 
 :-moz-placeholder {
   text-align: center;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #00cc99;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: brown;
+  border-radius: 50px;
 }
