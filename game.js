@@ -234,10 +234,13 @@ $("#buttonObat").click(function () {
 function makanActivity() {
   if (makanState && act.makan <= 100) {
     act.makan += act.makanI;
+    $("#makanIcon").attr("style", "height: 1.5em;");
   } else if (!makanState && act.makan > 0 && isGameOn){
     act.makan -= act.makanD;
+    $("#makanIcon").attr("style", "height: 1.5em; filter: invert(29%) sepia(82%) saturate(4347%) hue-rotate(348deg) brightness(88%) contrast(86%);");
   } else if (!makanState && act.makan > 0){
     act.makan -= 0.5;
+    $("#makanIcon").attr("style", "height: 1.5em;");
   }
   $("#progressBarMakan")
     .children()
@@ -246,10 +249,13 @@ function makanActivity() {
 function tidurActivity() {
   if (tidurState && act.tidur <= 100) {
     act.tidur += act.tidurI;
+    $("#tidurIcon").attr("style", "height: 1.5em;");
   } else if (!tidurState && act.tidur > 0 && isGameOn) {
     act.tidur -= act.tidurD;
+    $("#tidurIcon").attr("style", "height: 1.5em; filter: invert(29%) sepia(82%) saturate(4347%) hue-rotate(348deg) brightness(88%) contrast(86%);");
   } else if (!tidurState && act.tidur > 0) {
     act.tidur -= 0.5;
+    $("#tidurIcon").attr("style", "height: 1.5em;");
   }
 
   
@@ -279,8 +285,12 @@ function mainActivity(){
 function obatActivity() {
   if (obatState && act.obat <= 100) {
     act.obat += act.obatI;
+    $("#obatIcon").attr("style", "height: 1.3em; ");
   } else if (!obatState && act.obat > 0 && act.makan <= 50 && act.tidur <= 50){
     act.obat -= act.obatD;
+    $("#obatIcon").attr("style", "height: 1.3em; filter: invert(29%) sepia(82%) saturate(4347%) hue-rotate(348deg) brightness(88%) contrast(86%);");
+  }else{
+    $("#obatIcon").attr("style", "height: 1.3em; ");
   }
   $("#progressBarObat")
     .children()
@@ -542,6 +552,7 @@ function checkCollision(){
 }
 
 setInterval(function(){
+  $("#mainIcon").attr("style", "height: 1.5em;");
   if(isGameOn){
       starCountdown--;
       $("#displayNotifications").text(starCountdown + "s");
@@ -551,6 +562,7 @@ setInterval(function(){
           starY = Math.floor(Math.random()*tileCount);
           if(!starTaken){
             act.main -= act.mainD;
+            $("#mainIcon").attr("style", "height: 1.5em; filter: invert(29%) sepia(82%) saturate(4347%) hue-rotate(348deg) brightness(88%) contrast(86%);");
           }
           starTaken = false;
       }
