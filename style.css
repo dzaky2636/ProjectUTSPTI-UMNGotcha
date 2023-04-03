@@ -42,6 +42,7 @@
 .chevron-btn i {
   margin-left: 8px;
 }
+
 .horizontal {
   list-style-type: none;
   margin: 0;
@@ -80,8 +81,9 @@
   border-radius: 7px;
   overflow: hidden;
 }
+
 /* Pilihan button pertama */
-/* .btnmulai {
+.btnmulai {
   backface-visibility: hidden;
   position: relative;
   cursor: pointer;
@@ -99,10 +101,10 @@
   font-weight: 900;
   font-style: normal;
   text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.3);
-} */
+}
 
 /* Pilihan button kedua */
-.btnmulai {
+/* .btnmulai {
   font-family: Arial, Helvetica, sans-serif;
   width: 100px;
   height: 50px;
@@ -112,14 +114,19 @@
   color: white;
   cursor: pointer;
   position: relative;
-}
+} */
+
 .btnmulai:hover {
   background-color: white;
-  color: black;
-  transition: 2s ease;
+  color: rgb(6, 117, 0);
+  transition: 0.5s ease;
+  -webkit-transition: 0.5s ease;
+  -moz-transition: 0.5s ease;
+  -ms-transition: 0.5s ease;
+  -o-transition: 0.5s ease;
 }
 
-.btnmulai::before {
+/* .btnmulai::before {
   content: "";
   position: absolute;
   left: 0;
@@ -135,16 +142,17 @@
 .btnmulai:hover::before {
   background: white;
   top: 70px;
-}
+} */
 
-.tulisanumn {
+/* .tulisanumn {
   color: #fff;
   text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6 0 0 30px #0073e6, 0 0 35px #0073e6;
-}
+} */
 #grid {
   border: 2px solid black;
   background: white;
 }
+
 /* Pilihan Pertama Desain CSS Input Nama Halaman Utama */
 /* #inputNamaHewan {
   border: none;
@@ -183,7 +191,7 @@
   box-shadow: 0 1px 0 0 rgb(35 38 59 / 5%);
 } */
 ::selection {
-  background: #07da11;
+  background: rgb(59, 20, 8);
   color: #fff;
 }
 
@@ -199,16 +207,19 @@
   from {
     width: 0;
   }
+
   to {
     width: 100%;
   }
 }
 
 @keyframes blink-caret {
+
   from,
   to {
     border-color: transparent;
   }
+
   50% {
     border-color: orange;
   }
@@ -219,23 +230,29 @@
   animation: shake 300ms;
   color: red;
 }
+
 @keyframes shake {
   25% {
     transform: translateX(4px);
   }
+
   50% {
     transform: translateX(-4px);
   }
+
   75% {
     transform: translateX(4px);
   }
 }
+
 #inputNamaHewan::placeholder {
   color: green;
 }
+
 ::-ms-input-placeholder {
   color: green;
 }
+
 #inputNamaHewan {
   font-size: 14px;
   border-radius: 6px;
@@ -250,9 +267,11 @@
   width: 250px;
   caret-color: red;
 }
+
 #inputNamaHewan:hover {
   border-color: #ccc;
 }
+
 #inputNamaHewan:placeholder-shown {
   opacity: 1;
   transform: translateY(1rem);
@@ -262,6 +281,7 @@
   border-color: #9147ff;
   background: #fff;
 }
+
 /* Menengahkan placeholder pada Pengisian Nama */
 ::-webkit-input-placeholder {
   text-align: center;
@@ -274,13 +294,14 @@
 ::-webkit-scrollbar {
   width: 10px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #00cc99;
+  background: rgb(14, 56, 18);
   border-radius: 50px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: brown;
+  background: rgb(143, 82, 51);
   border-radius: 50px;
 }
 
@@ -295,7 +316,12 @@
   border: 4px solid lightblue;
   transition-delay: 0.5s;
   cursor: pointer;
+  -webkit-transition: all 2s ease;
+  -moz-transition: all 2s ease;
+  -ms-transition: all 2s ease;
+  -o-transition: all 2s ease;
 }
+
 #buttonMakan:hover,
 #buttonTidur:hover,
 #buttonMain:hover,
@@ -304,5 +330,9 @@
   border: 4px solid #a8eb12;
   background: #a8eb12;
   color: #000;
-  transition: box-shadow 7s, border 3s, background 3s, color 3s;
+  transition: box-shadow 5s, border 0.5s, background 0.1s, color 0.5s;
+  -webkit-transition: box-shadow 5s, border 0.5s, background 0.1s, color 0.5s;
+  -moz-transition: box-shadow 5s, border 0.5s, background 0.1s, color 0.5s;
+  -ms-transition: box-shadow 5s, border 0.5s, background 0.1s, color 0.5s;
+  -o-transition: box-shadow 5s, border 0.5s, background 0.1s, color 0.5s;
 }
