@@ -21,7 +21,7 @@ UMNGotcha merupakan permainan simulasi kehidupan hewan peliharaan dengan cara ki
 ### Video Presentasi Demo
 - https://youtu.be/waKRsFtmY0M
 
-### LINK GitHub
+### Link GitHub
 - https://github.com/dzaky2636/ProjectUTSPTI-UMNGotcha
 - https://github.com/dzaky2636/ProjectUTSPTI-UMNGotcha.git (clone)
 
