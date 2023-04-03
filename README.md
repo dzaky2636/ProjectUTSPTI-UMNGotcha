@@ -13,4 +13,4 @@
 4.	Hewan akan mati jika bar status kesehatan habis (0%).
 5.	Bar status Health akan berkurang apabila bar status makan dan tidur kurang dari setengah (50%).
 
-### Video Presentasi Demo
+### Video Presentasi Demo (MAX 3 MIN)
