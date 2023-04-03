@@ -10,17 +10,21 @@
   }
 }
 
+body {
+  overflow: hidden;
+}
+
+html {
+  zoom: 80%;
+}
+
 .ambilbg {
   background-image: url("assets/bgforestday.jpg");
   background-size: cover;
-  /* filter: blur(2px); */
-  /* height: 100%;
-    width: 100%; */
 }
 
 .navbar {
-  background: linear-gradient(to left, #33e041, #006400);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to left, #45AA40, #45AA40);
   color: #fff;
 }
 
@@ -82,7 +86,6 @@
   overflow: hidden;
 }
 
-/* Pilihan button pertama */
 .btnmulai {
   backface-visibility: hidden;
   position: relative;
@@ -103,19 +106,6 @@
   text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
-/* Pilihan button kedua */
-/* .btnmulai {
-  font-family: Arial, Helvetica, sans-serif;
-  width: 100px;
-  height: 50px;
-  border: 1px solid white;
-  border-radius: 100px;
-  background-color: transparent;
-  color: white;
-  cursor: pointer;
-  position: relative;
-} */
-
 .btnmulai:hover {
   background-color: white;
   color: rgb(6, 117, 0);
@@ -126,70 +116,11 @@
   -o-transition: 0.5s ease;
 }
 
-/* .btnmulai::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50px;
-  background: transparent;
-  height: 50%;
-  width: 100%;
-  transform: perspective(1em) rotateX(48deg) scale(1, 0.35);
-  filter: blur(8px);
-  transition: 1s ease;
-}
-
-.btnmulai:hover::before {
-  background: white;
-  top: 70px;
-} */
-
-/* .tulisanumn {
-  color: #fff;
-  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6 0 0 30px #0073e6, 0 0 35px #0073e6;
-} */
 #grid {
   border: 2px solid black;
   background: white;
 }
 
-/* Pilihan Pertama Desain CSS Input Nama Halaman Utama */
-/* #inputNamaHewan {
-  border: none;
-  border-bottom: 2px solid #8c8c8c;
-  font-size: 16px;
-  color: #333;
-  padding: 10px 10px;
-  transition: border-bottom-color 0.3s ease;
-  width: 300px;
-}
-
-#inputNamaHewan:focus {
-  border-bottom-color: #1abc9c;
-  outline: none;
-} */
-
-/* Pilihan Kedua Desain CSS Input Nama Halaman Utama */
-
-/* #inputNamaHewan {
-  position: relative;
-  cursor: text;
-  font-size: 14px;
-  line-height: 20px;  
-  padding: 0 16px;
-  height: 48px;
-  background-color: #fff;
-  border: 1px solid #d6d6e7;
-  border-radius: 3px;
-  color: rgb(35, 38, 59);
-  box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 30%);
-  overflow: hidden;
-  transition: all 100ms ease-in-out;
-}
-#inputNamaHewan:focus {
-  border-color: #3c4fe0;
-  box-shadow: 0 1px 0 0 rgb(35 38 59 / 5%);
-} */
 ::selection {
   background: rgb(59, 20, 8);
   color: #fff;
@@ -213,23 +144,21 @@
 }
 
 @keyframes blink-caret {
+
   from,
   to {
     border-color: transparent;
   }
 
   50% {
-    border-color: orange;
+    border-color: rgb(143, 82, 51);
   }
 }
+
 #gotchaatas {
-  color: hsla(9, 58%, 47%, 1);
-  color: hsla(9, 58%, 47%, 1);
-  color: linear-gradient(90deg, hsla(9, 58%, 47%, 1) 0%, hsla(215, 76%, 41%, 1) 100%);
-  color: -moz-linear-gradient(90deg, hsla(9, 58%, 47%, 1) 0%, hsla(215, 76%, 41%, 1) 100%);
-  color: -webkit-linear-gradient(90deg, hsla(9, 58%, 47%, 1) 0%, hsla(215, 76%, 41%, 1) 100%);
+  color: rgb(255, 255, 255);
 }
-/* Pilihan Ketiga Desain CSS Input Nama Halaman Utama */
+
 #inputNamaHewan:invalid {
   animation: shake 300ms;
   color: red;
@@ -250,7 +179,7 @@
 }
 
 #inputNamaHewan::placeholder {
-  color: green;
+  color: rgb(0, 0, 0);
 }
 
 ::-ms-input-placeholder {
@@ -263,27 +192,39 @@
   line-height: 1.5;
   padding: 5px 10px;
   transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
-  border: 2px solid #dee1e2;
+  border: 2px solid #000000;
   color: rgb(14, 14, 16);
-  background: #dee1e2;
+  background: #ffffff;
   display: block;
   height: 48px;
   width: 250px;
-  caret-color: red;
+  caret-color: rgb(143, 82, 51);
 }
 
 #inputNamaHewan:hover {
-  border-color: #ccc;
+  border-color: #009900;
 }
 
 #inputNamaHewan:placeholder-shown {
   opacity: 1;
   transform: translateY(1rem);
+  -webkit-transform: translateY(1rem);
+  -moz-transform: translateY(1rem);
+  -ms-transform: translateY(1rem);
+  -o-transform: translateY(1rem);
 }
 
 #inputNamaHewan:focus {
-  border-color: #9147ff;
-  background: #fff;
+  border-color: #000000;
+  background: #ffffff;
+}
+
+#inputNamaHewan:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+#inputNamaHewan {
+  text-align: center;
 }
 
 /* Menengahkan placeholder pada Pengisian Nama */
@@ -309,6 +250,14 @@
   border-radius: 50px;
 }
 
+#activityButtonsCard {
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
 #buttonMakan,
 #buttonTidur,
 #buttonMain,
@@ -317,7 +266,7 @@
   font-weight: 1.2rem;
   border: 1px solid;
   transition: all 2s ease;
-  border: 4px solid lightblue;
+  border: 4px solid #111214;
   transition-delay: 0.5s;
   cursor: pointer;
   -webkit-transition: all 2s ease;
@@ -330,10 +279,10 @@
 #buttonTidur:hover,
 #buttonMain:hover,
 #buttonObat:hover {
-  box-shadow: 0 0 20px #a8eb12, 0 0 40px #00e4b6;
-  border: 4px solid #a8eb12;
-  background: #a8eb12;
-  color: #000;
+  box-shadow: 0 0 20px #74E86B;
+  border: 4px solid #111214;
+  background: #74E86B;
+  color: black;
   transition: box-shadow 5s, border 0.5s, background 0.1s, color 0.5s;
   -webkit-transition: box-shadow 5s, border 0.5s, background 0.1s, color 0.5s;
   -moz-transition: box-shadow 5s, border 0.5s, background 0.1s, color 0.5s;
@@ -343,15 +292,4 @@
 
 .cardbawah {
   max-width: 500px;
-}
-
-.card-header {
-  background: linear-gradient(to right, #ff7777, #d98eff, #77deff);
-  transition: left 500ms;
-}
-
-.card-body {
-  background: #659999; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #f4791f, #659999); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #f4791f, #659999); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

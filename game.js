@@ -81,14 +81,14 @@ setInterval(function () {
     if (hour >= 24) {
       hour = 0;
       day++;
-      notify("Sekarang hari ke-" + day + "..");
+      notify("Sekarang hari ke" + day + "..");
     }
     if (minutes < 10) printMinutes = minutes.toString().padStart(2, "0");
     else printMinutes = minutes.toString();
     if (hour < 10) printHour = hour.toString().padStart(2, "0");
     else printHour = hour.toString();
 
-    document.getElementById("hourDisplay").innerHTML = "Jam: " + printHour + ":" + printMinutes;
+    document.getElementById("hourDisplay").innerHTML = "Jam " + printHour + ":" + printMinutes;
   }
 }, 1000);
 
@@ -156,7 +156,7 @@ function checkIfHewanDied() {
       $("#gameOverCard").show();
       $("#gameOverNama").text(hewan.nama);
       let gameOverAvatar;
-      switch(hewan.level){
+      switch(hewan.avatar){
         case 0: gameOverAvatar = "Styracosaurus"; break;
         case 1: gameOverAvatar = "Carnotaurus"; break;
         case 2: gameOverAvatar = "Baryonyx"; break;
@@ -239,7 +239,7 @@ function makanActivity() {
     act.makan -= act.makanD;
     $("#makanIcon").attr("style", "height: 1.5em; filter: invert(29%) sepia(82%) saturate(4347%) hue-rotate(348deg) brightness(88%) contrast(86%);");
   } else if (!makanState && act.makan > 0){
-    act.makan -= 0.5;
+    act.makan -= 1;
     $("#makanIcon").attr("style", "height: 1.5em;");
   }
   $("#progressBarMakan")
@@ -254,7 +254,7 @@ function tidurActivity() {
     act.tidur -= act.tidurD;
     $("#tidurIcon").attr("style", "height: 1.5em; filter: invert(29%) sepia(82%) saturate(4347%) hue-rotate(348deg) brightness(88%) contrast(86%);");
   } else if (!tidurState && act.tidur > 0) {
-    act.tidur -= 0.5;
+    act.tidur -= 1;
     $("#tidurIcon").attr("style", "height: 1.5em;");
   }
 
@@ -373,13 +373,13 @@ function redrawAvatar(){
   let avatarHeight;
   switch (hewan.level) {
     case 1:
-      avatarHeight = 12;
+      avatarHeight = 18;
       break;
     case 2:
-      avatarHeight = 16;
+      avatarHeight = 23;
       break;
     case 3:
-      avatarHeight = 20;
+      avatarHeight = 28;
       break;
   }
 
@@ -465,7 +465,7 @@ function startGameBermain(){
 }
 function exitGameBermain(){
     if(!deathState){
-      notify(hewan.nama + " lelah bermain..");
+      notify(hewan.nama + " berhenti bermain");
     }
 
     if(act.makan <= 25){
@@ -557,7 +557,7 @@ setInterval(function(){
       starCountdown--;
       $("#displayNotifications").text(starCountdown + "s");
       if(starCountdown == 0){
-          starCountdown = 8;
+          starCountdown = 6;
           starX = Math.floor(Math.random()*tileCount);
           starY = Math.floor(Math.random()*tileCount);
           if(!starTaken){
