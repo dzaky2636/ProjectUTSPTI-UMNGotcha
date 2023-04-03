@@ -1,7 +1,15 @@
 # ProjectUTSPTI-UMNGotcha
 
 ### UMNGotcha
-UMNGotcha merupakan permainan simulasi kehidupan hewan peliharaan dengan kita bisa mengendalikan kehidupan perliharaan seperti bagaimana dia minum, makan obat, tidur, bermain dan lain2 , yang diawali dengan memilih avatar hewan dan memasukkan nama hewan peliharaan.
+UMNGotcha merupakan permainan simulasi kehidupan hewan peliharaan dengan cara kita mengendalikan kehidupan hewan perliharaan kita seperti makan, makan obat, tidur, dan bermain yang diawali dengan memilih avatar hewan dan memasukkan nama hewan peliharaan.
+
+### Fitur
+1. Telah disediakan 3 pilihan avatar yang berbeda dan pemain harus memilih salah satu dari 3 avatar yang telah disediakan.
+2. Background akan berubah sesuai dengan waktu dalam permainan dan ada 4 waktu yang telah disediakan (Pagi, Siang, Sore, dan Malam).
+3. Menampilkan salam sesuai dengan waktu dalam permainan pada saat waktu berganti.
+4. Terdapat fitur untuk bermain yang akan menambah bar status bermain dari hewan peliharaan.
+5. Fitur permainan yang dapat dimainkan berupa game clicker atau dapat juga menggunakan tombol arrow pada keyboard untuk menggerakkan hewan dan menggambil bintang yang akan muncul dan hilang sesuai dengan waktu yang akan ditampilkan, ketika gagal mendapatkan bintang maka bar status bermain dari pemain akan berkurang dan sebaliknya, jika berhasil mendapatkan bintang maka bar status pemain akan bertambah.
+6. Akan ada pesan yang akan memberitahu pemain jika hewan sedang kelelahan dan lapar.
 
 ###	Aturan Bermain
 1.	Bar status tidur dan makan akan berkurang lebih cepat ketika sedang bermain.
@@ -10,7 +18,12 @@ UMNGotcha merupakan permainan simulasi kehidupan hewan peliharaan dengan kita bi
 4.	Hewan akan mati jika bar status kesehatan habis (0%).
 5.	Bar status Health akan berkurang apabila bar status makan dan tidur kurang dari setengah (50%).
 
-### Video Presentasi Demo (MAX 3 MIN)
+### Video Presentasi Demo
+- https://youtu.be/waKRsFtmY0M
+
+### LINK GitHub
+- https://github.com/dzaky2636/ProjectUTSPTI-UMNGotcha
+- https://github.com/dzaky2636/ProjectUTSPTI-UMNGotcha.git (clone)
 
 ### About Us
 1. Axel Reginald Wiranto - 00000078456 (Frontend)
