@@ -222,7 +222,13 @@
     border-color: orange;
   }
 }
-
+#gotchaatas {
+  color: hsla(9, 58%, 47%, 1);
+  color: hsla(9, 58%, 47%, 1);
+  color: linear-gradient(90deg, hsla(9, 58%, 47%, 1) 0%, hsla(215, 76%, 41%, 1) 100%);
+  color: -moz-linear-gradient(90deg, hsla(9, 58%, 47%, 1) 0%, hsla(215, 76%, 41%, 1) 100%);
+  color: -webkit-linear-gradient(90deg, hsla(9, 58%, 47%, 1) 0%, hsla(215, 76%, 41%, 1) 100%);
+}
 /* Pilihan Ketiga Desain CSS Input Nama Halaman Utama */
 #inputNamaHewan:invalid {
   animation: shake 300ms;
@@ -333,4 +339,19 @@
   -moz-transition: box-shadow 5s, border 0.5s, background 0.1s, color 0.5s;
   -ms-transition: box-shadow 5s, border 0.5s, background 0.1s, color 0.5s;
   -o-transition: box-shadow 5s, border 0.5s, background 0.1s, color 0.5s;
+}
+
+.cardbawah {
+  max-width: 500px;
+}
+
+.card-header {
+  background: linear-gradient(to right, #ff7777, #d98eff, #77deff);
+  transition: left 500ms;
+}
+
+.card-body {
+  background: #659999; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f4791f, #659999); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f4791f, #659999); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
