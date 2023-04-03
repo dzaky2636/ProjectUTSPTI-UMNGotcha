@@ -14,7 +14,7 @@
 
     <!-- Navbar -->
     <div class="row">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 16vh">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 7em">
         <div class="container-fluid">
           <div class="navbar-nav mx-auto mx-sm-auto ms-md-auto">
             <div class="row align-items-center">
@@ -33,7 +33,7 @@
     </div>
 
     <div id="halamanStart" class="row">
-      <div class="d-flex flex-column align-items-center justify-content-center ambilbg bg-success" style="height: 100vh;">
+      <div class="d-flex flex-column align-items-center justify-content-center ambilbg bg-success" style="height: 53em;">
         <div class="d-flex flex-row align-items-center justify-content-center">
           <div>
             <button id="buttonSelectLeft" class="rounded" style="font-size: 81px; color: rgb(243, 156, 18); border: 5.2px solid; padding: 15px; border-radius: 39%; opacity: 1; -webkit-text-stroke-width: 3.8px;"><i class="fa fa-chevron-left"></i></button>
@@ -113,6 +113,69 @@
         <div id="displayAvatarContainerContainer" class="d-flex align-items-center justify-content-center" style="height: 25em; width: 30em">
           <div id="displayAvatarContainer"></div>
           <canvas id="grid" class="mt-3" width="400" height="400"></canvas>
+          <div id="gameOverCard" class="card mt-3" style="width: 20em;">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-6">
+                  <div class="text-start fs-5">Stats: </div>
+                </div>
+                <div class="col-6">
+                  <div class="text-end fs-5">GAME OVER</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <div>Nama</div>
+                </div>
+                <div class="col-1">
+                  <div>:</div>
+                </div>
+                <div class="col-6">
+                  <div id="gameOverNama" class=""></div>
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col-5">
+                  <div>Avatar</div>
+                </div>
+                <div class="col-1">
+                  <div>:</div>
+                </div>
+                <div class="col-6">
+                  <div id="gameOverAvatar" class=""></div>
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col-5">
+                  <div>Level</div>
+                </div>
+                <div class="col-1">
+                  <div>:</div>
+                </div>
+                <div class="col-6">
+                  <div id="gameOverLevel" class=""></div>
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col-5">
+                  <div>Hari ke-</div>
+                </div>
+                <div class="col-1">
+                  <div>:</div>
+                </div>
+                <div class="col-6">
+                  <div id="gameOverDay" class=""></div>
+                </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col-12">
+                  <div class="text-center"><a href="index.html">KLIK</a> untuk mulai ulang!</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="d-flex flex-column">
@@ -183,6 +246,7 @@
     <script>
       window.onload = function(){
         checkInputNama();
+        $("#gameOverCard").hide();
         $("#halamanGame").hide();
         $("#gameControlsCard").hide();
         $("#grid").hide();
