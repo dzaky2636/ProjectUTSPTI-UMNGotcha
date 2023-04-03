@@ -389,16 +389,16 @@ function redrawAvatar(){
       else if (deathState) $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + avatarHeight * 9 + '" autoplay="autoplay"><source src="assets/avatars/Styracosaurus/death.webm" type="video/webm" /></video>');
       else if (!makanState && !tidurState && !mainState && !obatState) $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Styracosaurus/idle.gif" style="height: ' + avatarHeight + 'em;">');
       else if (makanState) $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Styracosaurus/eat.gif" style="height: ' + avatarHeight + 'em;">');
-      else if (tidurState) $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + avatarHeight * 9 + '" autoplay="autoplay"><source src="assets/avatars/Styracosaurus/death.webm" type="video/webm" /></video>');
+      else if (tidurState) $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + avatarHeight * 10 + '" autoplay="autoplay"><source src="assets/avatars/Styracosaurus/death.webm" type="video/webm" /></video>');
       else if (mainState) $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Styracosaurus/cry.gif" style="height: ' + avatarHeight + 'em;">');
       else if (obatState) $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Styracosaurus/EatingDrugs.gif" style="height: ' + avatarHeight + 'em;">');
       break;
     case 1:
-      if(wakeUpState){$("#displayAvatarContainer").append('<video id="displayAvatar" height="' + avatarHeight * 9 + '" autoplay="autoplay"><source src="assets/avatars/Carnotaurus/wakeup.webm" type="video/webm" /></video>');}
-      else if (deathState) $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + avatarHeight * 9 + '" autoplay="autoplay"><source src="assets/avatars/Carnotaurus/death.webm" type="video/webm" /></video>');
+      if(wakeUpState){$("#displayAvatarContainer").append('<video id="displayAvatar" height="' + avatarHeight * 13 + '" autoplay="autoplay"><source src="assets/avatars/Carnotaurus/wakeup.webm" type="video/webm" /></video>');}
+      else if (deathState) $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + avatarHeight * 15 + '" autoplay="autoplay"><source src="assets/avatars/Carnotaurus/death.webm" type="video/webm" /></video>');
       else if (!makanState && !tidurState && !mainState && !obatState) $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Carnotaurus/idle.gif" style="height: ' + avatarHeight + 'em;">');
       else if (makanState) $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Carnotaurus/eat.gif" style="height: ' + avatarHeight + 'em;">');
-      else if (tidurState) $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + avatarHeight * 9 + '" autoplay="autoplay"><source src="assets/avatars/Carnotaurus/death.webm" type="video/webm" /></video>');
+      else if (tidurState) $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + avatarHeight * 13 + '" autoplay="autoplay"><source src="assets/avatars/Carnotaurus/death.webm" type="video/webm" /></video>');
       else if (mainState) $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Carnotaurus/cry.gif" style="height: ' + avatarHeight + 'em;">');
       else if (obatState) $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Carnotaurus/eatingDrugs.gif" style="height: ' + avatarHeight + 'em;">');
       break;
@@ -407,7 +407,7 @@ function redrawAvatar(){
       else if (deathState) $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + avatarHeight * 9 + '" autoplay="autoplay"><source src="assets/avatars/Baryonyx/death.webm" type="video/webm" /></video>');
       else if (!makanState && !tidurState && !mainState && !obatState) $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Baryonyx/idle.gif" style="height: ' + avatarHeight + 'em;">');
       else if (makanState) $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Baryonyx/eat.gif" style="height: ' + avatarHeight + 'em;">');
-      else if (tidurState) $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + avatarHeight * 9 + '" autoplay="autoplay"><source src="assets/avatars/Baryonyx/death.webm" type="video/webm" /></video>');
+      else if (tidurState) $("#displayAvatarContainer").append('<video id="displayAvatar" height="' + avatarHeight * 10 + '" autoplay="autoplay"><source src="assets/avatars/Baryonyx/death.webm" type="video/webm" /></video>');
       else if (mainState) $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Baryonyx/cry.gif" style="height: ' + avatarHeight + 'em;">');
       else if (obatState) $("#displayAvatarContainer").append('<img id="displayAvatar" class="p-5" src="assets/avatars/Baryonyx/EatingDrugs.gif" style="height: ' + avatarHeight + 'em;">');
       break;
