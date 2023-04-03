@@ -1,7 +1,7 @@
 # ProjectUTSPTI-UMNGotcha
 
 ### UMNGotcha
-UMNGotcha merupakan permainan simulasi kehidupan hewan peliharaan, yang diawali dengan memilih avatar hewan dan memasukkan nama hewan peliharaan.
+UMNGotcha merupakan permainan simulasi kehidupan hewan peliharaan dengan kita bisa mengendalikan kehidupan perliharaan seperti bagaimana dia minum, makan obat, tidur, bermain dan lain2 , yang diawali dengan memilih avatar hewan dan memasukkan nama hewan peliharaan.
 
 ###	Aturan Bermain
 1.	Bar status tidur dan makan akan berkurang lebih cepat ketika sedang bermain.
