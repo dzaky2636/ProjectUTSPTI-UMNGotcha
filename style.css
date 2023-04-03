@@ -200,7 +200,6 @@
   white-space: nowrap;
   overflow: hidden;
   border-right: 3px solid;
-  font-family: monospace;
 }
 
 @keyframes typing {
@@ -214,7 +213,6 @@
 }
 
 @keyframes blink-caret {
-
   from,
   to {
     border-color: transparent;
